@@ -153,7 +153,7 @@ class Model:
         sess = tf.compat.v1.Session()  # TF session
 
         saver = tf.compat.v1.train.Saver(max_to_keep=1)  # saver saves model to file
-        model_dir = os.path.dirname(os.path.abspath('charList.txt')).replace("\\", "/")[2:]+'/SimpleHTR-master/model/'
+        model_dir = os.path.dirname(os.path.abspath('charList.txt')).replace("\\", "/")+'/SimpleHTR-master/model/'
         #print(model_dir)
         latest_snapshot = tf.train.latest_checkpoint(model_dir)  # is there a saved model?
         
@@ -305,4 +305,5 @@ class Model:
     def save(self) -> None:
         """Save model to file."""
         self.snap_ID += 1
-        self.saver.save(self.sess, '../model/snapshot', global_step=self.snap_ID)
+        directorio_destino = os.path.dirname(os.path.abspath('charList.txt')).replace("\\", "/") +'/SimpleHTR-master/model/'
+        self.saver.save(self.sess, directorio_destino , global_step=self.snap_ID)

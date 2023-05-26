@@ -2,6 +2,8 @@ import argparse
 import json
 from typing import Tuple, List
 
+import tensorflow as tf
+
 import cv2
 import editdistance
 from path import Path
@@ -11,12 +13,13 @@ from model import Model, DecoderType
 from preprocessor import Preprocessor
 
 import os
+import wandb
 
 class FilePaths:
     """Filenames and paths to data.""" 
-    fn_char_list = os.path.dirname(os.path.abspath('charList.txt')).replace("\\", "/")[2:] +'/SimpleHTR-master/model/charList.txt'
-    fn_summary =  os.path.dirname(os.path.abspath('summary.json')).replace("\\", "/")[2:] +'/SimpleHTR-master/model/summary.json'
-    fn_corpus = os.path.dirname(os.path.abspath('corpus.txt')).replace("\\", "/")[2:] +'/SimpleHTR-master/data/corpus.txt'
+    fn_char_list = os.path.dirname(os.path.abspath('charList.txt')).replace("\\", "/") +'/SimpleHTR-master/model/charList.txt'
+    fn_summary =  os.path.dirname(os.path.abspath('summary.json')).replace("\\", "/") +'/SimpleHTR-master/model/summary.json'
+    fn_corpus = os.path.dirname(os.path.abspath('corpus.txt')).replace("\\", "/") +'/SimpleHTR-master/data/corpus.txt'
 
 
 def get_img_height() -> int:
@@ -48,6 +51,8 @@ def train(model: Model,
           early_stopping: int = 25) -> None:
     """Trains NN."""
     epoch = 0  # number of training epochs since start
+    max_epochs=25
+
     summary_char_error_rates = []
     summary_word_accuracies = []
 
@@ -82,6 +87,9 @@ def train(model: Model,
         average_train_loss.append((sum(train_loss_in_epoch)) / len(train_loss_in_epoch))
         write_summary(average_train_loss, summary_char_error_rates, summary_word_accuracies)
 
+        potaxie_ninapaula_onichan = (sum(train_loss_in_epoch)) / len(train_loss_in_epoch)
+        wandb.log({"acc":word_accuracy, "loss": potaxie_ninapaula_onichan })
+
         # reset train loss list
         train_loss_in_epoch = []
 
@@ -95,10 +103,17 @@ def train(model: Model,
             print(f'Character error rate not improved, best so far: {best_char_error_rate * 100.0}%')
             no_improvement_since += 1
 
+        if epoch>=max_epochs:
+            print('SAVING MODEL...')
+            model.save()
+            break
+
         # stop training if no more improvement in the last x epochs
         if no_improvement_since >= early_stopping:
             print(f'No more improvement for {early_stopping} epochs. Training stopped.')
             break
+
+    wandb.finish()
         
 
 def validate(model: Model, loader: DataLoaderIAM, line_mode: bool) -> Tuple[float, float]:
@@ -130,6 +145,9 @@ def validate(model: Model, loader: DataLoaderIAM, line_mode: bool) -> Tuple[floa
     # print validation result
     char_error_rate = num_char_err / num_char_total
     word_accuracy = num_word_ok / num_word_total
+
+    wandb.log({"acc":word_accuracy})
+
     print(f'Character error rate: {char_error_rate * 100.0}%. Word accuracy: {word_accuracy * 100.0}%.')
     return char_error_rate, word_accuracy
 
@@ -158,7 +176,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument('--data_dir', help='Directory containing IAM dataset.', type=Path, required=False)
     parser.add_argument('--fast', help='Load samples from LMDB.', action='store_true')
     parser.add_argument('--line_mode', help='Train to read text lines instead of single words.', action='store_true')
-    parser.add_argument('--img_file', help='Image used for inference.', type=Path, default=os.path.dirname(os.path.abspath('word.png')).replace("\\", "/")[2:] +'/SimpleHTR-master/data/word.png')
+    parser.add_argument('--img_file', help='Image used for inference.', type=Path, default=os.path.dirname(os.path.abspath('word.png')).replace("\\", "/") +'/SimpleHTR-master/data/word.png')
     parser.add_argument('--early_stopping', help='Early stopping epochs.', type=int, default=25)
     parser.add_argument('--dump', help='Dump output of NN to CSV file(s).', action='store_true')
     
@@ -167,6 +185,19 @@ def parse_args() -> argparse.Namespace:
 
 def main():
     """Main function."""
+    
+     #start a new wandb run to track this script
+    wandb.init(
+    # set the wandb project where this run will be logged
+    project="ed_group_11",
+    
+    # track hyperparameters and run metadata
+    config={
+    "learning_rate": 0.02,
+    "architecture": "CNN",
+    "dataset": "data_dir",
+    "epochs": 15, }
+    )
 
     # parse arguments and set CTC decoder
     args = parse_args()
