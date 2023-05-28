@@ -92,6 +92,7 @@ def train(model: Model,
 
         # reset train loss list
         train_loss_in_epoch = []
+        break
 
         # if best validation accuracy so far, save model parameters
         if char_error_rate < best_char_error_rate:
