@@ -8,6 +8,9 @@ import lmdb
 import numpy as np
 from path import Path
 
+import os
+import tqdm
+
 Sample = namedtuple('Sample', 'gt_text, file_path')
 Batch = namedtuple('Batch', 'imgs, gt_texts, batch_size')
 
@@ -36,25 +39,25 @@ class DataLoaderIAM:
         self.batch_size = batch_size
         self.samples = []
 
-        f = open(data_dir / 'gt/words.txt')
         chars = set() 
-       
-        for line in f:
-            # ignore empty and comment lines
-            line = line.strip()
-            if not line or line[0] == '#':
-                continue
+        walk = []
 
-            line_split = line.split(' ')
-            file_name = data_dir / 'img' / line_split[0]
+        for i,j,k in list(os.walk(data_dir / 'mnt')):
+            if j == list([]) and k != list([]):
+                walk.append((i,k))
+
+        for directorio_actual, archivos in walk:
+                for archivo in archivos:
+                    # Ruta completa del archivo
+                    file_name = os.path.join(directorio_actual, archivo)
             
+                    # Verificar si el archivo es una imagen
+                    if os.path.isfile(file_name) and archivo.lower().endswith(('.png', '.jpg', '.jpeg')):
+                        gt_text = archivo.split("_")[1]
+                        chars = chars.union(set(list(gt_text))) #{'C', 'O', 'P', 'Y'}
 
-            # GT text are columns starting at 9
-            gt_text = ' '.join(line_split[1:])
-            chars = chars.union(set(list(gt_text))) #{'C', 'O', 'P', 'Y'}
-
-            # put sample into list
-            self.samples.append(Sample(gt_text, file_name))
+                        # put sample into list
+                        self.samples.append(Sample(gt_text, file_name))
 
         # split into training and validation set: 95% - 5%
         split_idx = int(data_split * len(self.samples))
@@ -70,6 +73,11 @@ class DataLoaderIAM:
 
         # list of all chars in dataset
         self.char_list = sorted(list(chars))
+        nina_char = os.path.dirname(os.path.abspath('charList.txt')).replace("\\", "/") +'/SimpleHTR-master/model/'
+        with open(nina_char+'charList.txt','w') as archivo:
+            linea = "".join(str(elemento) for elemento in self.char_list)
+            archivo.write(linea)
+
 
     def train_set(self) -> None:
         """Switch to randomly chosen subset of training set."""
