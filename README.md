@@ -9,7 +9,7 @@ En este proyecto se utilizaron dos conjuntos de datos diferentes para entrenar y
 MJSynth consiste en datos sintéticos generados automáticamente y contiene alrededor de 90,000 imágenes de palabras en inglés. Estas imágenes de palabras sintéticas fueron creadas mediante la superposición de caracteres en diferentes fondos y variaciones de fuentes. El dataset está disponible en el siguiente enlace: MJSynth Dataset (https://www.robots.ox.ac.uk/~vgg/data/text/)
 
 ### IIIT-5K Word Dataset:
-Además del dataset sintético MJSynth, se utilizó el dataset IIIT-5K Word para realizar pruebas y evaluaciones. El IIIT-5K Word Dataset consta de aproximadamente 5,000 imágenes de palabras en inglés reales y no sintéticas. Este conjunto de datos fue recolectado y anotado por el Centro de Visión e Imágenes por Computadora (CVIT) del Instituto Internacional de Tecnología de la Información de Hyderabad (IIIT-H). Puedes acceder a este dataset en el siguiente enlace (https://cvit.iiit.ac.in/research/projects/cvit-projects/the-iiit-5k-word-dataset)
+Además del dataset sintético MJSynth, se utilizó el dataset IIIT-5K Word para realizar pruebas y evaluaciones. El IIIT-5K Word Dataset consta de aproximadamente 5,000 imágenes de palabras en inglés reales y no sintéticas. Este conjunto de datos fue recolectado y anotado por el Centro de Visión e Imágenes por Computadora (CVIT) del Instituto Internacional de Tecnología de la Información de Hyderabad (IIIT-H). Puedes acceder a este dataset en el siguiente [enlace](https://cvit.iiit.ac.in/research/projects/cvit-projects/the-iiit-5k-word-dataset)
 
 ## Estructura de NN
 ### 1. Redes neuronales convolucionales (CNN)
