@@ -2,30 +2,39 @@
 # Cropped Text Recognition
 El objetivo principal de este proyecto es desarrollar e implementar un sistema de reconocimiento de texto capaz de identificar y transcribir el texto presente en imágenes que contengan palabras. 
 
-## Bases de Datos
-En este proyecto se utilizaron dos conjuntos de datos diferentes para entrenar y evaluar el sistema de reconocimiento de texto:
+## 1. Cargar Datos / Bases de Datos
 
-### Dataset MJSynth:
-MJSynth consiste en datos sintéticos generados automáticamente y contiene alrededor de 90,000 imágenes de palabras en inglés. Estas imágenes de palabras sintéticas fueron creadas mediante la superposición de caracteres en diferentes fondos y variaciones de fuentes. El dataset está disponible en el siguiente enlace: MJSynth Dataset (https://www.robots.ox.ac.uk/~vgg/data/text/)
+En el proceso de carga de datos, se utilizan los módulos necesarios para obtener las imágenes y sus respectivas etiquetas contenidas en las bases de datos utilizadas. En este proyecto se han utilizado dos conjuntos de datos diferentes para entrenar y evaluar el sistema de reconocimiento de texto:
+### 1.1 IIIT-5K Word Dataset
 
-### IIIT-5K Word Dataset:
-Además del dataset sintético MJSynth, se utilizó el dataset IIIT-5K Word para realizar pruebas y evaluaciones. El IIIT-5K Word Dataset consta de aproximadamente 5,000 imágenes de palabras en inglés reales y no sintéticas. Este conjunto de datos fue recolectado y anotado por el Centro de Visión e Imágenes por Computadora (CVIT) del Instituto Internacional de Tecnología de la Información de Hyderabad (IIIT-H). Puedes acceder a este dataset en el siguiente [enlace](https://cvit.iiit.ac.in/research/projects/cvit-projects/the-iiit-5k-word-dataset)
+Se ha utilizado para realizar pruebas y evaluaciones. IIIT-5K Word Dataset consta de aproximadamente 5,000 imágenes de palabras en inglés reales y no sintéticas. Este conjunto de datos fue recolectado y anotado por el Centro de Visión e Imágenes por Computadora (CVIT) del Instituto Internacional de Tecnología de la Información de Hyderabad (IIIT-H). Puedes acceder a este dataset en el siguiente enlace. Para el conjunto de datos IIIT-5K Words, se recopila la imagen y el texto de fuentes separadas. Las palabras se obtienen de un archivo de texto que relaciona los nombres de archivo con las palabras correspondientes.
+### 1.2 Dataset MJSynth
 
-## Estructura de NN
-### 1. Redes neuronales convolucionales (CNN)
+Utilizado para las pruebas oficiales de evaluación. MJSynth consiste en datos sintéticos generados automáticamente y contiene alrededor de 90,000 imágenes de palabras en inglés. El dataset está disponible en el siguiente enlace. En el caso de MJSynth, la palabra se extrae directamente del nombre del archivo.
+## 2. Estructurar NN
+### 2.1 Redes neuronales convolucionales (CNN)
 
+La primera etapa consiste en extraer características de la imagen utilizando cinco capas de CNN. Se definen filtros, valores de características, stride y pooling para controlar la reducción de la resolución espacial en cada capa. En cada capa, se realiza una convolución, se aplica normalización, una función de activación ReLU y un max pooling.
+### 2.2 Redes neuronales recurrentes (RNN)
 
-### 2. Redes neuronales recurrentes (RNN)
+A continuación, las características obtenidas en la CNN se pasan a dos capas de RNN, específicamente LSTM (Long-Short Term Memory), que modelan la secuencialidad y las dependencias temporales en el texto. Esto proporciona las probabilidades de clasificación para cada característica, es decir, las probabilidades de que pertenezcan a cada carácter.
+### 2.3 CTC
 
+Para alinear la secuencia de entrada con la secuencia de salida, dado que el output es una secuencia de longitud variable, se utiliza el decodificador CTC. Se utiliza un nuevo carácter llamado 'blankspace' para capturar y representar correctamente la estructura y el orden de los elementos en la secuencia de salida, modelando adecuadamente la repetición de caracteres. El repositorio proporciona dos algoritmos de búsqueda para calcular la secuencia más probable: BestPath y BeamSearch.
+#### 2.3.1 BestPath
 
-### 3. CTC
+BestPath selecciona el símbolo con mayor probabilidad en cada paso de tiempo y los concatena para formar la secuencia resultante.
+#### 2.3.2 BeamSearch
 
-## Detalles de implementación
+BeamSearch busca las N secuencias más probables (determinado por el tamaño del beam) y selecciona la secuencia final con mayor probabilidad.
+#### 2.3.3 Función de pérdida y optimizador
 
-## Pruebas / Resultados
+La función de pérdida utilizada es CTC loss, que se calcula como el negativo del logaritmo de la suma de las probabilidades de alineación. Como optimizador, se utiliza Adam (Adaptive Moment Estimation) para una actualización más precisa de los pesos de la red.
+### 3. Detalles de implementación
+### 4. Pruebas / Resultados
 
-## Créditos 
-
+Se presentan los valores de precisión y pérdida obtenidos en la prueba con ambos algoritmos de búsqueda. No se observaron mejoras significativas, lo que indica que el cuello de botella se encuentra en el reconocimiento de caracteres y no en la decodificación.
+### 5. Créditos
 ## Code structure
 You must create as many folders as you consider. You can use the proposed structure or replace it by the one in the base code that you use as starting point. Do not forget to add Markdown files as needed to explain well the code and how to use it.
 
