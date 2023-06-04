@@ -61,7 +61,7 @@ BeamSearch - MJSynth
 ![BeamSearch - MJSynth - accuracy](doc/beamsearch_allchars_accuracy.png)
 ![BeamSearch - MJSynth - cm](doc/beamsearch_allchars_cm.png)
 
-<img src="doc/beamsearch_allchars_loss.png" alt="Descripción de la imagen" width="200">
+<img src="doc/beamsearch_allchars_loss.png" alt="Descripción de la imagen" width="2000">
 
 
 
