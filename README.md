@@ -49,7 +49,7 @@ A continuación se presentan los valores de precisión y pérdida obtenidos en l
 
 #### 4.1 Utilizando Mayúsuculas y Minúsculas
 BestPath - MJSynth
-![BestPath - MJSynth]([https://example.com/images/logo.png](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_loss.png))
+![BestPath - MJSynth](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_loss.png))
 
 BeamSearch - MJSynth
 BeamSearch - IIIT
