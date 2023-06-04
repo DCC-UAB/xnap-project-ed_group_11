@@ -49,17 +49,17 @@ A continuación se presentan los valores de precisión y pérdida obtenidos en l
 
 #### 4.1 Utilizando Mayúsuculas y Minúsculas
 BestPath - MJSynth
-![BestPath - MJSynth - loss](doc/bestpath_allchars_loss.png | width=500)
-![BestPath - MJSynth - accuracy](doc/bestpath_allchars_accuracy.png | width=500)
-![BestPath - MJSynth - cm](doc/bestpath_allchars_cm.png | width=500)
+<img src="doc/bestpath_allchars_loss.png" alt="BestPath - MJSynth - loss" width="500">
+<img src="doc/bestpath_allchars_accuracy.png" alt="BestPath - MJSynth - accuracy" width="500">
+<img src="doc/bestpath_allchars_cm.png" alt="BestPath - MJSynth - cm" width="500">
 
 BestPath - IIIT
-![BestPath - IIIT](doc/bestpath_allchars_iiit.png | width=500)
+<img src="doc/bestpath_allchars_iiit.png" alt="BestPath - IIIT" width="500">
 
 BeamSearch - MJSynth
-![BeamSearch - MJSynth - loss](doc/beamsearch_allchars_loss.png | width=500)
-![BeamSearch - MJSynth - accuracy](doc/beamsearch_allchars_accuracy.png | width=500)
-![BeamSearch - MJSynth - cm](doc/beamsearch_allchars_cm.png | width=500)
+<img src="doc/beamsearch_allchars_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
+<img src="doc/beamsearch_allchars_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
+<img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 
 <img src="doc/beamsearch_allchars_loss.png" alt="Descripción de la imagen" width="1000">
 
