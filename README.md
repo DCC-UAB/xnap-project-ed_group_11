@@ -1,4 +1,3 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=11122290&assignment_repo_type=AssignmentRepo)
 # Cropped Text Recognition
 El objetivo principal de este proyecto es desarrollar e implementar un sistema de reconocimiento de texto capaz de identificar y transcribir el texto presente en imágenes que contengan palabras. 
 
@@ -50,6 +49,8 @@ A continuación se presentan los valores de precisión y pérdida obtenidos en l
 
 #### 4.1 Utilizando Mayúsuculas y Minúsculas
 BestPath - MJSynth
+![BestPath - MJSynth]([https://example.com/images/logo.png](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_loss.png))
+
 BeamSearch - MJSynth
 BeamSearch - IIIT
 
