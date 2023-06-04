@@ -17,18 +17,16 @@ Recalcar que hemos entrenado tan solo con 15G.
 ## 2. Preprocesamiento
 
 Aunque no sea necesario para una CNN, se recomienda aplicar un tamño fijo de imagenes, así nos aseguramos que los filtros convolucionales sean aplicados consistentemente en todas las imágenes, permitiendo que las características extraídas sean comparables y consistentes en todo el conjunto de datos.Es por eso que todas las imagenes son introducidas dentro de un rectangulo de un tamaño determinado:
-******IMAGEN
-******IMAGEN
+<img src="doc/deep.png" alt="BestPath - IIIT" width="500">
+<img src="doc/deep_framed.png" alt="BestPath - IIIT" width="500">
 
 Para saber que tamaño escoger, hemos analizados los diferentes tamaños que encontramos en el dataset. Visualizando la distribución de tamaños vemos en los dos conjuntos de datos una zona mucho mas concentrada.
-
-******IMAGEN
-******IMAGEN
+<img src="doc/distribución_tamaño-iiit.png" alt="BestPath - IIIT" width="500">
+<img src="doc/distribución_tamaño-mjsynth.png" alt="BestPath - IIIT" width="500">
 
 Además, tenemos la opción de aplicar técnicas de aumento de datos a una imagen. Estas técnicas incluyen cambios en la apariencia fotométrica, como desenfoque gaussiano, dilatación y erosión. También se realizan transformaciones geométricas, como cambios en la posición y escala de la imagen. Además, se ajusta el brillo, se agrega ruido y se invierte la imagen. Estas modificaciones no busca aumentar la cantidad de imagenes, si no enriquecer el conjunto de datos.
-
-******IMAGEN
-******IMAGEN
+<img src="doc/deep.png" alt="BestPath - IIIT" width="500">
+<img src="doc/deep_da.png" alt="BestPath - IIIT" width="500">
 
 ## 3. Estructurar NN
 A continuación se crea la estructura de la red neuronal, en nuestro caso está compuesta de una CNN, una RNN y una CTC.
@@ -104,7 +102,7 @@ La precisión alcanza un valor del 64.8%, lo que significa que el modelo acierta
 La matriz de confusión muestra una línea diagonal pronunciada, lo cual indica que la mayoría de las predicciones son correctas. Sin embargo, se observa una línea paralela a la diagonal, lo que sugiere que el modelo tiende a confundir mayúsculas y minúsculas en algunas letras. Específicamente, se observa que las letras "e" y "i" son más propensas a ser confundidas. Además, se aprecia que el modelo tiende a predecir más letras en minúsculas que en mayúsculas.
 
 #### BestPath - IIIT
-<img src="doc/bestpath_allchars_iiit.png" alt="BestPath - IIIT" width="500">
+<img src="doc/bestpath_allchars_iiit.png" alt="BestPath - IIIT" width="1000">
 Se ha obtenido una precisión del 80.3%, lo que indica que el modelo tiene un alto rendimiento en la tarea de reconocimiento de texto. Esta precisión es considerablemente mayor que en el caso anterior, lo cual sugiere que el modelo está funcionando mejor en un conjunto de datos en el que solo hay letras mayúsculas.
 
 La función de pérdida es de 2.1, lo que indica que el modelo tiene un nivel bajo de error. Este resultado es coherente con la alta precisión obtenida, lo que sugiere que el modelo ha aprendido eficazmente las características.
@@ -121,9 +119,9 @@ Es interesante observar que, a pesar de cambiar el algoritmo de decodificación,
 Después de realizar un análisis exhaustivo, descubrimos que el número de minúsculas en el dataset es significativamente mayor, con 9,193,336 minúsculas en comparación con 5,264,306 mayúsculas. 
 
 #### BestPath - MJSynth
-<img src="doc/beamsearch_allchars_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
-<img src="doc/beamsearch_allchars_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
-<img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
+<img src="doc/bestpath_min_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
+<img src="doc/bestpath_min_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
+<img src="doc/bestpath_min_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 
 #### BeamSearch - MJSynth
 <img src="doc/beamsearch_allchars_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
