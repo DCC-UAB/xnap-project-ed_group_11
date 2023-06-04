@@ -14,27 +14,47 @@ Propiedad interesate: todas las palabras están en mayúsucula.
 Utilizado para las pruebas oficiales de evaluación. MJSynth consiste en datos sintéticos generados automáticamente y contiene alrededor de 90,000 imágenes de palabras en inglés. 
 En el caso de MJSynth, la palabra se extrae directamente del nombre del archivo.
 Recalcar que hemos entrenado tan solo con 15G.
-## 2. Estructurar NN
-### 2.1 Redes neuronales convolucionales (CNN)
+## 2. Preprocesamiento
+
+Aunque no sea necesario para una CNN, se recomienda aplicar un tamño fijo de imagenes, así nos aseguramos que los filtros convolucionales sean aplicados consistentemente en todas las imágenes, permitiendo que las características extraídas sean comparables y consistentes en todo el conjunto de datos.Es por eso que todas las imagenes son introducidas dentro de un rectangulo de un tamaño determinado:
+******IMAGEN
+******IMAGEN
+
+Para saber que tamaño escoger, hemos analizados los diferentes tamaños que encontramos en el dataset. Visualizando la distribución de tamaños vemos en los dos conjuntos de datos una zona mucho mas concentrada.
+
+******IMAGEN
+******IMAGEN
+
+Además, tenemos la opción de aplicar técnicas de aumento de datos a una imagen. Estas técnicas incluyen cambios en la apariencia fotométrica, como desenfoque gaussiano, dilatación y erosión. También se realizan transformaciones geométricas, como cambios en la posición y escala de la imagen. Además, se ajusta el brillo, se agrega ruido y se invierte la imagen. Estas modificaciones no busca aumentar la cantidad de imagenes, si no enriquecer el conjunto de datos.
+
+******IMAGEN
+******IMAGEN
+
+## 3. Estructurar NN
+A continuación se crea la estructura de la red neuronal, en nuestro caso está compuesta de una CNN, una RNN y una CTC.
+
+******IMAGEN
+
+### 3.1 Redes neuronales convolucionales (CNN)
 
 La primera etapa consiste en extraer características de la imagen utilizando cinco capas de CNN. Se definen filtros, valores de características, stride y pooling para controlar la reducción de la resolución espacial en cada capa. En cada capa, se realiza una convolución, se aplica normalización, una función de activación ReLU y un max pooling.
-### 2.2 Redes neuronales recurrentes (RNN)
+### 3.2 Redes neuronales recurrentes (RNN)
 
 A continuación, las características obtenidas en la CNN se pasan a dos capas de RNN, específicamente LSTM (Long-Short Term Memory), que modelan la secuencialidad y las dependencias temporales en el texto. Esto proporciona las probabilidades de clasificación para cada característica, es decir, las probabilidades de que pertenezcan a cada carácter.
-### 2.3 Connectionist Temporal Classification CTC
+### 3.3 Connectionist Temporal Classification (CTC)
 
 Para alinear la secuencia de entrada con la secuencia de salida, dado que el output es una secuencia de longitud variable, se utiliza el decodificador CTC. Se utiliza un nuevo carácter llamado 'blankspace' para capturar y representar correctamente la estructura y el orden de los elementos en la secuencia de salida, modelando adecuadamente la repetición de caracteres. El repositorio proporciona dos algoritmos de búsqueda para calcular la secuencia más probable: BestPath y BeamSearch.
-#### 2.3.1 BestPath
+#### 3.3.1 BestPath
 
 BestPath selecciona el símbolo con mayor probabilidad en cada paso de tiempo y los concatena para formar la secuencia resultante.
-#### 2.3.2 BeamSearch
+#### 3.3.2 BeamSearch
 
 BeamSearch busca las N secuencias más probables (determinado por el tamaño del beam) y selecciona la secuencia final con mayor probabilidad.
-#### 2.3.3 Función de pérdida y optimizador
+#### 3.3.3 Función de pérdida y optimizador
 
 La función de pérdida utilizada es CTC loss, que se calcula como el negativo del logaritmo de la suma de las probabilidades de alineación. Como optimizador, se utiliza Adam (Adaptive Moment Estimation) para una actualización más precisa de los pesos de la red.
-### 3. Detalles de implementación Concretos
-#### 3.1 Estructura de Github
+### 4. Detalles de implementación Concretos
+#### 4.1 Estructura de Github
 ```
 ├── main.py
 ├── test.py
@@ -58,7 +78,7 @@ En la estructura de GitHub, tenemos los siguientes archivos y carpetas:
         IIIT/: Carpeta que contiene los datos del conjunto de datos IIIT.
         MJSynth/: Carpeta que contiene los datos del conjunto de datos MJSynth.
         
-#### 3.2 Argumentos de línea de comandos
+#### 4.2 Argumentos de línea de comandos
 ```
     --decoder: selecciona entre los decodificadores CTC "bestpath", "beamsearch" y "wordbeamsearch". Por defecto es "bestpath". Para la opción "wordbeamsearch", consulta los detalles a continuación.
     -- data_augmentation: aplica técnicas de data augmentation
@@ -66,14 +86,14 @@ En la estructura de GitHub, tenemos los siguientes archivos y carpetas:
     -- minusula: utilizar solo minúsculas
     -- mayuscula: utilizar solo mayúsuculas
 ```
-#### 3.3 Opción Inferencia
+#### 4.3 Opción Inferencia
 La opción de "inferencia" permite utilizar una imagen de entrada y obtener la palabra correspondiente después de haber entrenado el modelo. Es una forma de evaluar el rendimiento del sistema en la tarea de reconocimiento de texto.
 
-### 4. Pruebas / Resultados
+### 5. Pruebas / Resultados
 Se han tenido en cuenta dos casos. El entrenamiento teniendo en cuenta cada uno de los carácteres posibles (mayúsculas y minúsuculas incluidas) y solo minúsculas, ya que son los valores que mas predominan en nuestro dataset.
 A continuación se presentan los valores de precisión y pérdida obtenidos en la prueba con ambos algoritmos de búsqueda. Teniendo en cuenta todos los chars posibles (mayúsculas y minúsculas).
 
-#### 4.1 Utilizando Mayúsuculas y Minúsculas
+#### 5.1 Utilizando Mayúsuculas y Minúsculas
 
 #### BestPath - MJSynth
 <img src="doc/bestpath_allchars_loss.png" alt="BestPath - MJSynth - loss" width="500">
@@ -97,7 +117,7 @@ En este conjunto de datos, solo se encuentran letras mayúsculas. Este hecho nos
 <img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 Es interesante observar que, a pesar de cambiar el algoritmo de decodificación, los resultados obtenidos siguen siendo similares, con una precisión de alrededor de 63.5% y una pérdida de alrededor de 5.8%. Esto sugiere que la restricción en el rendimiento del sistema no se encuentra en el algoritmo de decodificación en sí.
 
-#### 4.2 Uso exclusivo de minúsculas
+#### 5.2 Uso exclusivo de minúsculas
 Después de realizar un análisis exhaustivo, descubrimos que el número de minúsculas en el dataset es significativamente mayor, con 9,193,336 minúsculas en comparación con 5,264,306 mayúsculas. 
 
 #### BestPath - MJSynth
@@ -112,15 +132,14 @@ Después de realizar un análisis exhaustivo, descubrimos que el número de min�
 
 Estos resultados respaldan nuestra hipótesis inicial de que el modelo tiene un desempeño superior al trabajar con letras minúsculas.
 
-### 5. Créditos
-
+### 6. Créditos
 A continuación, se mencionan los créditos y las fuentes utilizadas en el desarrollo del proyecto:
 
  - IIIT-5K Word Dataset: El conjunto de datos fue recolectado y anotado por el Centro de Visión e Imágenes por Computadora (CVIT) del Instituto Internacional de Tecnología de la Información de Hyderabad (IIIT-H). Puedes acceder a este dataset en el siguiente [enlace](https://cvit.iiit.ac.in/research/projects/cvit-projects/the-iiit-5k-word-dataset).
  - MJSynth Dataset: Este dataset fue generado automáticamente y está disponible en el siguiente [enlace](https://www.robots.ox.ac.uk/~vgg/data/text/).
  - Código base del proyecto: El código base utilizado en este proyecto se basa en el repositorio SimpleHTR desarrollado por [Harald Scheidl](https://github.com/githubharald).
 
-## Colaboradores
+## 7. Colaboradoras
 Nina Stekacheva Sancho - nina.stekacheva@autonoma.cat
 Paula Serrano Sierra - paula.serranos@autonoma.cat
 
