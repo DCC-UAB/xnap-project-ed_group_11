@@ -48,15 +48,16 @@ Se han tenido en cuenta dos casos. El entrenamiento teniendo en cuenta cada uno 
 A continuación se presentan los valores de precisión y pérdida obtenidos en la prueba con ambos algoritmos de búsqueda. Teniendo en cuenta todos los chars posibles (mayúsculas y minúsculas).
 
 #### 4.1 Utilizando Mayúsuculas y Minúsculas
-BestPath - MJSynth
+
+#### BestPath - MJSynth
 <img src="doc/bestpath_allchars_loss.png" alt="BestPath - MJSynth - loss" width="500">
 <img src="doc/bestpath_allchars_accuracy.png" alt="BestPath - MJSynth - accuracy" width="500">
 <img src="doc/bestpath_allchars_cm.png" alt="BestPath - MJSynth - cm" width="500">
 
-BestPath - IIIT
+#### BestPath - IIIT
 <img src="doc/bestpath_allchars_iiit.png" alt="BestPath - IIIT" width="500">
 
-BeamSearch - MJSynth
+#### BeamSearch - MJSynth
 <img src="doc/beamsearch_allchars_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
 <img src="doc/beamsearch_allchars_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
 <img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
