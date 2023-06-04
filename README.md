@@ -23,18 +23,18 @@ Aunque no sea necesario para una CNN, se recomienda aplicar un tamño fijo de im
 
 Para saber que tamaño escoger, hemos analizados los diferentes tamaños que encontramos en el dataset. Visualizando la distribución de tamaños vemos en los dos conjuntos de datos una zona mucho mas concentrada.
 
-<img src="doc/distribución_tamaño-iiit.png" alt="BestPath - IIIT" width="500">
-<img src="doc/distribución_tamaño-mjsynth.png" alt="BestPath - IIIT" width="500">
+<img src="doc/distribución_tamaño_iiit.png" alt="BestPath - IIIT" width="500">
+<img src="doc/distribución_tamaño_mjsynth.png" alt="BestPath - IIIT" width="500">
 
 Además, tenemos la opción de aplicar técnicas de aumento de datos a una imagen. Estas técnicas incluyen cambios en la apariencia fotométrica, como desenfoque gaussiano, dilatación y erosión. También se realizan transformaciones geométricas, como cambios en la posición y escala de la imagen. Además, se ajusta el brillo, se agrega ruido y se invierte la imagen. Estas modificaciones no busca aumentar la cantidad de imagenes, si no enriquecer el conjunto de datos.
 
 <img src="doc/deep.png" alt="BestPath - IIIT" width="500">
-<img src="doc/model_overview.webp" alt="BestPath - IIIT" width="500">
+<img src="doc/deep_da.png" alt="BestPath - IIIT" width="500">
 
 ## 3. Estructurar NN
 A continuación se crea la estructura de la red neuronal, en nuestro caso está compuesta de una CNN, una RNN y una CTC.
 
-<img src="doc/deep_da.png" alt="BestPath - IIIT" width="500">
+<img src="doc/model_overview.webp" alt="BestPath - IIIT" width="500">
 
 ### 3.1 Redes neuronales convolucionales (CNN)
 
@@ -121,7 +121,7 @@ Es interesante observar que, a pesar de cambiar el algoritmo de decodificación,
 #### 5.2 Uso exclusivo de minúsculas
 Después de realizar un análisis exhaustivo, descubrimos que el número de minúsculas en el dataset es significativamente mayor, con 9,193,336 minúsculas en comparación con 5,264,306 mayúsculas. 
 
-<img src="doc/minusculas_acc_loss.png" alt="BeamSearch - MJSynth - cm" width="500">
+<img src="doc/minusculas_acc_loss.png" alt="BeamSearch - MJSynth - cm" width="1000">
 Se aprecia una precisión de aproximadamente 0.8 en los dos casos y una loss de 0.2 mas o menos.
 Estos resultados respaldan nuestra hipótesis inicial de que el modelo tiene un desempeño superior al trabajar con letras minúsculas.
 
