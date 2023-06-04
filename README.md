@@ -99,7 +99,7 @@ A continuación se presentan los valores de precisión y pérdida obtenidos en l
 
 ### 5.1 Utilizando Mayúsuculas y Minúsculas
 
-#### BestPath - MJSynth
+#### BestPath - MJSynth - Mayúsuculas y Minúsculas
 <img src="doc/bestpath_allchars_loss.png" alt="BestPath - MJSynth - loss" width="500">
 La función de pérdida alcanza un valor de 6.2, lo cual indica que el modelo tiene un nivel moderado de error en la tarea de reconocimiento de texto. Esto sugiere que el modelo necesita ajustes adicionales para mejorar su rendimiento.
 <img src="doc/bestpath_allchars_accuracy.png" alt="BestPath - MJSynth - accuracy" width="500">
@@ -107,7 +107,7 @@ La precisión alcanza un valor del 64.8%, lo que significa que el modelo acierta
 <img src="doc/bestpath_allchars_cm.png" alt="BestPath - MJSynth - cm" width="500">
 La matriz de confusión muestra una línea diagonal pronunciada, lo cual indica que la mayoría de las predicciones son correctas. Sin embargo, se observa una línea paralela a la diagonal, lo que sugiere que el modelo tiende a confundir mayúsculas y minúsculas en algunas letras. Específicamente, se observa que las letras "e" y "i" son más propensas a ser confundidas. Además, se aprecia que el modelo tiende a predecir más letras en minúsculas que en mayúsculas.
 
-#### BestPath - IIIT
+#### BestPath - IIIT - Mayúsuculas y Minúsculas
 <img src="doc/bestpath_allchars_iiit.png" alt="BestPath - IIIT" width="1000">
 Se ha obtenido una precisión del 80.3%, lo que indica que el modelo tiene un alto rendimiento en la tarea de reconocimiento de texto. Esta precisión es considerablemente mayor que en el caso anterior, lo cual sugiere que el modelo está funcionando mejor en un conjunto de datos en el que solo hay letras mayúsculas.
 
@@ -115,7 +115,7 @@ La función de pérdida es de 2.1, lo que indica que el modelo tiene un nivel ba
 
 En este conjunto de datos, solo se encuentran letras mayúsculas. Este hecho nos puede indicar que uno de los cuellos de botella se encuentra en el aprendizaje de las variaciones entre letras mayúsculas y minúsculas.
 
-#### BeamSearch - MJSynth
+#### BeamSearch - MJSynth - Mayúsuculas y Minúsculas
 <img src="doc/beamsearch_allchars_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
 <img src="doc/beamsearch_allchars_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
 <img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
@@ -126,10 +126,10 @@ Después de realizar un análisis exhaustivo, descubrimos que el número de min�
 
 <img src="doc/minusculas_acc_loss.png" alt="BeamSearch - MJSynth - cm" width="1000">
 Se aprecia una precisión de aproximadamente 0.8 en los dos casos y una loss de 0.2 mas o menos.
-#### BestPath - MJSynth
+#### BestPath - MJSynth - Minúsculas
 
 <img src="doc/bestpath_min_cm_39.png" alt="BeamSearch - MJSynth - cm" width="500">
-#### BeamSearch - MJSynth
+#### BeamSearch - MJSynth - Minúsculas
 
 <img src="doc/beamsearch_min_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 Vemos también un resultado impoluto en nuestras matrices de confusión, prácticamente no se aprecia ningún símbolo fuera de la diagonal de aciertos.
@@ -144,6 +144,7 @@ A continuación, se mencionan los créditos y las fuentes utilizadas en el desar
 
 ## 7. Colaboradoras
 Nina Stekacheva Sancho - nina.stekacheva@autonoma.cat
+
 Paula Serrano Sierra - paula.serranos@autonoma.cat
 
 Xarxes Neuronals i Aprenentatge Profund
