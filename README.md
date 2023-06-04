@@ -35,7 +35,20 @@ BeamSearch busca las N secuencias más probables (determinado por el tamaño del
 La función de pérdida utilizada es CTC loss, que se calcula como el negativo del logaritmo de la suma de las probabilidades de alineación. Como optimizador, se utiliza Adam (Adaptive Moment Estimation) para una actualización más precisa de los pesos de la red.
 ### 3. Detalles de implementación
 
-    Preprocesamiento de imágenes: Se redimensionaron todas las imágenes a un tamaño uniforme de 32x32 píxeles y se normalizaron los valores de los píxeles para asegurar una entrada consistente a la red. Además, se recortaron las regiones de interés que contenían las palabras en cada imagen para reducir el ruido y mejorar la precisión del reconocimiento.
+Estructura de Github
+```
+├── main.py
+├── test.py
+├── train.py
+├── preprocess.py
+├── data_loader.py
+├── model.py
+└── data/
+    ├── IIIT/
+    └── MJSynth/
+```
+
+Se redimensionaron todas las imágenes a un tamaño uniforme de 32x32 píxeles y se normalizaron los valores de los píxeles para asegurar una entrada consistente a la red. Además, se recortaron las regiones de interés que contenían las palabras en cada imagen para reducir el ruido y mejorar la precisión del reconocimiento.
 
     Configuración de la arquitectura de la red: La red neuronal se compone de cinco capas convolucionales (CNN) seguidas de dos capas recurrentes (RNN) basadas en la arquitectura LSTM. Se utilizaron filtros de diferentes tamaños y se aplicó la función de activación ReLU después de cada capa convolucional para introducir la no linealidad en la red. Las capas recurrentes LSTM permitieron modelar la secuencialidad y las dependencias temporales en el texto.
 
@@ -51,29 +64,40 @@ A continuación se presentan los valores de precisión y pérdida obtenidos en l
 
 #### BestPath - MJSynth
 <img src="doc/bestpath_allchars_loss.png" alt="BestPath - MJSynth - loss" width="500">
+La función de pérdida alcanza un valor de 6.2, lo cual indica que el modelo tiene un nivel moderado de error en la tarea de reconocimiento de texto. Esto sugiere que el modelo necesita ajustes adicionales para mejorar su rendimiento.
 <img src="doc/bestpath_allchars_accuracy.png" alt="BestPath - MJSynth - accuracy" width="500">
+La precisión alcanza un valor del 64.8%, lo que significa que el modelo acierta correctamente aproximadamente el 64.8% de las muestras evaluadas. Si bien esta precisión es aceptable, aún hay margen para mejorar el rendimiento del modelo y aumentar la precisión en futuras iteraciones.
 <img src="doc/bestpath_allchars_cm.png" alt="BestPath - MJSynth - cm" width="500">
+La matriz de confusión muestra una línea diagonal pronunciada, lo cual indica que la mayoría de las predicciones son correctas. Sin embargo, se observa una línea paralela a la diagonal, lo que sugiere que el modelo tiende a confundir mayúsculas y minúsculas en algunas letras. Específicamente, se observa que las letras "e" y "i" son más propensas a ser confundidas. Además, se aprecia que el modelo tiende a predecir más letras en minúsculas que en mayúsculas.
 
 #### BestPath - IIIT
 <img src="doc/bestpath_allchars_iiit.png" alt="BestPath - IIIT" width="500">
+Se ha obtenido una precisión del 80.3%, lo que indica que el modelo tiene un alto rendimiento en la tarea de reconocimiento de texto. Esta precisión es considerablemente mayor que en el caso anterior, lo cual sugiere que el modelo está funcionando mejor en un conjunto de datos en el que solo hay letras mayúsculas.
+
+La función de pérdida es de 2.1, lo que indica que el modelo tiene un nivel bajo de error. Este resultado es coherente con la alta precisión obtenida, lo que sugiere que el modelo ha aprendido eficazmente las características.
+
+En este conjunto de datos, solo se encuentran letras mayúsculas. Este hecho nos puede indicar que uno de los cuellos de botella se encuentra en el aprendizaje de las variaciones entre letras mayúsculas y minúsculas.
+
+#### BeamSearch - MJSynth
+<img src="doc/beamsearch_allchars_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
+<img src="doc/beamsearch_allchars_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
+<img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
+Es interesante observar que, a pesar de cambiar el algoritmo de decodificación, los resultados obtenidos siguen siendo similares, con una precisión de alrededor de 63.5% y una pérdida de alrededor de 5.8%. Esto sugiere que la restricción en el rendimiento del sistema no se encuentra en el algoritmo de decodificación en sí.
+
+#### 4.2 Uso exclusivo de minúsculas
+Después de realizar un análisis exhaustivo, descubrimos que el número de minúsculas en el dataset es significativamente mayor, con 9,193,336 minúsculas en comparación con 5,264,306 mayúsculas. 
+
+#### BestPath - MJSynth
+<img src="doc/beamsearch_allchars_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
+<img src="doc/beamsearch_allchars_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
+<img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 
 #### BeamSearch - MJSynth
 <img src="doc/beamsearch_allchars_loss.png" alt="BeamSearch - MJSynth - loss" width="500">
 <img src="doc/beamsearch_allchars_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
 <img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 
-<img src="doc/beamsearch_allchars_loss.png" alt="Descripción de la imagen" width="1000">
 
-
-
-
-#### 4.2 Uso exclusivo de minúsculas
-BestPath
-![BestPath - MJSynth](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_loss.png)
-BeamSearch
-![BestPath - MJSynth](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_loss.png)
-
-Se presentan los valores de precisión y pérdida obtenidos en la prueba con ambos algoritmos de búsqueda. No se observaron mejoras significativas, lo que indica que el cuello de botella se encuentra en el reconocimiento de caracteres y no en la decodificación.
 ### 5. Créditos
 
 A continuación, se mencionan los créditos y las fuentes utilizadas en el desarrollo del proyecto:
@@ -83,27 +107,6 @@ A continuación, se mencionan los créditos y las fuentes utilizadas en el desar
  - MJSynth Dataset: Este dataset fue generado automáticamente y está disponible en el siguiente [enlace](https://www.robots.ox.ac.uk/~vgg/data/text/).
 
  - Código base del proyecto: El código base utilizado en este proyecto se basa en el repositorio SimpleHTR desarrollado por [Harald Scheidl](https://github.com/githubharald).
-
-
-Recuerda citar adecuadamente estas fuentes si utilizas este proyecto como referencia o base para tu propia implementación.
-
-## Code structure
-You must create as many folders as you consider. You can use the proposed structure or replace it by the one in the base code that you use as starting point. Do not forget to add Markdown files as needed to explain well the code and how to use it.
-
-## Example Code
-The given code is a simple CNN example training on the MNIST dataset. It shows how to set up the [Weights & Biases](https://wandb.ai/site)  package to monitor how your network is learning, or not.
-
-Before running the code you have to create a local environment with conda and activate it. The provided [environment.yml](https://github.com/DCC-UAB/XNAP-Project/environment.yml) file has all the required dependencies. Run the following command: ``conda env create --file environment.yml `` to create a conda environment with all the required dependencies and then activate it:
-```
-conda activate xnap-example
-```
-
-To run the example code:
-```
-python main.py
-```
-
-
 
 ## Colaboradores
 Nina Stekacheva Sancho - nina.stekacheva@autonoma.cat
