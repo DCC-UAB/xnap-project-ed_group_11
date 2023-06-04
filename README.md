@@ -72,15 +72,15 @@ La función de pérdida utilizada es CTC loss, que se calcula como el negativo d
 ```
 En la estructura de GitHub, tenemos los siguientes archivos y carpetas:
 
-    main.py: El archivo principal que contiene el punto de entrada de la aplicación.
-    test.py: Archivo para realizar pruebas y evaluaciones del sistema.
-    train.py: Archivo para entrenar el modelo.
-    preprocess.py: Archivo que contiene funciones de preprocesamiento de datos.
-    data_loader.py: Archivo que carga los datos y prepara las imágenes y etiquetas para su uso en el modelo.
-    model.py: Archivo que define la arquitectura del modelo de reconocimiento de texto.
-    data/: Carpeta que contiene los conjuntos de datos utilizados.
-        IIIT/: Carpeta que contiene los datos del conjunto de datos IIIT.
-        MJSynth/: Carpeta que contiene los datos del conjunto de datos MJSynth.
+main.py: El archivo principal que contiene el punto de entrada de la aplicación.
+test.py: Archivo para realizar pruebas y evaluaciones del sistema.
+train.py: Archivo para entrenar el modelo.
+preprocess.py: Archivo que contiene funciones de preprocesamiento de datos.
+data_loader.py: Archivo que carga los datos y prepara las imágenes y etiquetas para su uso en el modelo.
+model.py: Archivo que define la arquitectura del modelo de reconocimiento de texto.
+data/: Carpeta que contiene los conjuntos de datos utilizados.
+    IIIT/: Carpeta que contiene los datos del conjunto de datos IIIT.
+    MJSynth/: Carpeta que contiene los datos del conjunto de datos MJSynth.
         
 #### 4.2 Argumentos de línea de comandos
 ```
