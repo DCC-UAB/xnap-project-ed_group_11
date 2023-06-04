@@ -22,10 +22,10 @@ Aunque no sea necesario para una CNN, se recomienda aplicar un tamño fijo de im
 <img src="doc/deep_framed.png" alt="BestPath - IIIT" width="500">
 
 Para saber que tamaño escoger, hemos analizados los diferentes tamaños que encontramos en el dataset. Visualizando la distribución de tamaños vemos en los dos conjuntos de datos una zona mucho mas concentrada.
-### 2. Distribución tamaño IIIT
+#### Distribución tamaño IIIT
 
 <img src="doc/distribución_tamaño_iiit.png" alt="BestPath - IIIT" width="500">
-### 2. Distribución tamaño MJSynth
+#### Distribución tamaño MJSynth
 
 <img src="doc/distribución_tamaño_mjsynth.png" alt="BestPath - IIIT" width="500">
 
@@ -126,8 +126,11 @@ Después de realizar un análisis exhaustivo, descubrimos que el número de min�
 
 <img src="doc/minusculas_acc_loss.png" alt="BeamSearch - MJSynth - cm" width="1000">
 Se aprecia una precisión de aproximadamente 0.8 en los dos casos y una loss de 0.2 mas o menos.
-<img src="doc/bestpath_min_cm_39.png" alt="BeamSearch - MJSynth - cm" width="1000">
-<img src="doc/beamsearch_min_cm.png" alt="BeamSearch - MJSynth - cm" width="1000">
+#### BestPath - MJSynth
+<img src="doc/bestpath_min_cm_39.png" alt="BeamSearch - MJSynth - cm" width="500">
+#### BeamSearch - MJSynth
+<img src="doc/beamsearch_min_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
+Vemos también un resultado impoluto en nuestras matrices de confusión, prácticamente no se aprecia ningún símbolo fuera de la diagonal de aciertos.
 Estos resultados respaldan nuestra hipótesis inicial de que el modelo tiene un desempeño superior al trabajar con letras minúsculas.
 
 ### 6. Créditos
