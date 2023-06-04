@@ -54,7 +54,7 @@ BestPath - MJSynth
 ![BestPath - MJSynth - cm](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/bestpath_allchars_cm.png)
 
 BestPath - IIIT
-![BestPath - IIT](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/bestpath_allchars_iiit.png)
+![BestPath - IIT](doc/bestpath_allchars_iiit.png)
 
 BeamSearch - MJSynth
 ![BeamSearch - MJSynth - loss](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_loss.png)
