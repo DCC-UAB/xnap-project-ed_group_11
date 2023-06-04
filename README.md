@@ -49,17 +49,20 @@ A continuación se presentan los valores de precisión y pérdida obtenidos en l
 
 #### 4.1 Utilizando Mayúsuculas y Minúsculas
 BestPath - MJSynth
-![BestPath - MJSynth - loss](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/bestpath_allchars_loss.png)
-![BestPath - MJSynth - accuracy](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/bestpath_allchars_accuracy.png)
-![BestPath - MJSynth - cm](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/bestpath_allchars_cm.png)
+![BestPath - MJSynth - loss](doc/bestpath_allchars_loss.png)
+![BestPath - MJSynth - accuracy](doc/bestpath_allchars_accuracy.png)
+![BestPath - MJSynth - cm](doc/bestpath_allchars_cm.png)
 
 BestPath - IIIT
 ![BestPath - IIT](doc/bestpath_allchars_iiit.png)
 
 BeamSearch - MJSynth
-![BeamSearch - MJSynth - loss](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_loss.png)
-![BeamSearch - MJSynth - accuracy](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_accuracy.png)
-![BeamSearch - MJSynth - cm](https://github.com/DCC-UAB/xnap-project-ed_group_11/blob/main/doc/beamsearch_allchars_cm.png)
+![BeamSearch - MJSynth - loss](doc/beamsearch_allchars_loss.png)
+![BeamSearch - MJSynth - accuracy](doc/beamsearch_allchars_accuracy.png)
+![BeamSearch - MJSynth - cm](doc/beamsearch_allchars_cm.png)
+
+<img src="doc/beamsearch_allchars_loss.png" alt="Descripción de la imagen" width="20">
+
 
 
 
