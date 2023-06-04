@@ -33,9 +33,8 @@ BeamSearch busca las N secuencias más probables (determinado por el tamaño del
 #### 2.3.3 Función de pérdida y optimizador
 
 La función de pérdida utilizada es CTC loss, que se calcula como el negativo del logaritmo de la suma de las probabilidades de alineación. Como optimizador, se utiliza Adam (Adaptive Moment Estimation) para una actualización más precisa de los pesos de la red.
-### 3. Detalles de implementación
-
-Estructura de Github
+### 3. Detalles de implementación Concretos
+#### 3.1 Estructura de Github
 ```
 ├── main.py
 ├── test.py
@@ -47,15 +46,29 @@ Estructura de Github
     ├── IIIT/
     └── MJSynth/
 ```
+En la estructura de GitHub, tenemos los siguientes archivos y carpetas:
 
-Se redimensionaron todas las imágenes a un tamaño uniforme de 32x32 píxeles y se normalizaron los valores de los píxeles para asegurar una entrada consistente a la red. Además, se recortaron las regiones de interés que contenían las palabras en cada imagen para reducir el ruido y mejorar la precisión del reconocimiento.
+    main.py: El archivo principal que contiene el punto de entrada de la aplicación.
+    test.py: Archivo para realizar pruebas y evaluaciones del sistema.
+    train.py: Archivo para entrenar el modelo.
+    preprocess.py: Archivo que contiene funciones de preprocesamiento de datos.
+    data_loader.py: Archivo que carga los datos y prepara las imágenes y etiquetas para su uso en el modelo.
+    model.py: Archivo que define la arquitectura del modelo de reconocimiento de texto.
+    data/: Carpeta que contiene los conjuntos de datos utilizados.
+        IIIT/: Carpeta que contiene los datos del conjunto de datos IIIT.
+        MJSynth/: Carpeta que contiene los datos del conjunto de datos MJSynth.
+        
+#### 3.2 Argumentos de línea de comandos
+```
+    --decoder: selecciona entre los decodificadores CTC "bestpath", "beamsearch" y "wordbeamsearch". Por defecto es "bestpath". Para la opción "wordbeamsearch", consulta los detalles a continuación.
+    -- data_augmentation: aplica técnicas de data augmentation
+    -- img_file: image that is used for inference.
+    -- minusula: utilizar solo minúsculas
+    -- mayuscula: utilizar solo mayúsuculas
+```
+#### 3.3 Opción Inferencia
+La opción de "inferencia" permite utilizar una imagen de entrada y obtener la palabra correspondiente después de haber entrenado el modelo. Es una forma de evaluar el rendimiento del sistema en la tarea de reconocimiento de texto.
 
-    Configuración de la arquitectura de la red: La red neuronal se compone de cinco capas convolucionales (CNN) seguidas de dos capas recurrentes (RNN) basadas en la arquitectura LSTM. Se utilizaron filtros de diferentes tamaños y se aplicó la función de activación ReLU después de cada capa convolucional para introducir la no linealidad en la red. Las capas recurrentes LSTM permitieron modelar la secuencialidad y las dependencias temporales en el texto.
-
-    Entrenamiento del modelo: El modelo se entrenó utilizando el algoritmo de optimización Adam con una tasa de aprendizaje inicial de 0.001. Se utilizó un tamaño de lote de 32 y se realizaron 20 épocas de entrenamiento. Durante el entrenamiento, se aplicó la técnica de regularización de dropout con una tasa de 0.5 para evitar el sobreajuste.
-
-    Evaluación y métricas: Para evaluar el rendimiento del modelo, se utilizó la precisión y la pérdida como métricas principales. La precisión se calculó como la proporción de palabras correctamente reconocidas en el conjunto de prueba. La pérdida se calculó utilizando la función de pérdida CTC para medir la diferencia entre las etiquetas predichas y las reales.
-    
 ### 4. Pruebas / Resultados
 Se han tenido en cuenta dos casos. El entrenamiento teniendo en cuenta cada uno de los carácteres posibles (mayúsculas y minúsuculas incluidas) y solo minúsculas, ya que son los valores que mas predominan en nuestro dataset.
 A continuación se presentan los valores de precisión y pérdida obtenidos en la prueba con ambos algoritmos de búsqueda. Teniendo en cuenta todos los chars posibles (mayúsculas y minúsculas).
@@ -97,15 +110,14 @@ Después de realizar un análisis exhaustivo, descubrimos que el número de min�
 <img src="doc/beamsearch_allchars_accuracy.png" alt="BeamSearch - MJSynth - accuracy" width="500">
 <img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 
+Estos resultados respaldan nuestra hipótesis inicial de que el modelo tiene un desempeño superior al trabajar con letras minúsculas.
 
 ### 5. Créditos
 
 A continuación, se mencionan los créditos y las fuentes utilizadas en el desarrollo del proyecto:
 
  - IIIT-5K Word Dataset: El conjunto de datos fue recolectado y anotado por el Centro de Visión e Imágenes por Computadora (CVIT) del Instituto Internacional de Tecnología de la Información de Hyderabad (IIIT-H). Puedes acceder a este dataset en el siguiente [enlace](https://cvit.iiit.ac.in/research/projects/cvit-projects/the-iiit-5k-word-dataset).
-
  - MJSynth Dataset: Este dataset fue generado automáticamente y está disponible en el siguiente [enlace](https://www.robots.ox.ac.uk/~vgg/data/text/).
-
  - Código base del proyecto: El código base utilizado en este proyecto se basa en el repositorio SimpleHTR desarrollado por [Harald Scheidl](https://github.com/githubharald).
 
 ## Colaboradores
