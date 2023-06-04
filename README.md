@@ -22,10 +22,10 @@ Aunque no sea necesario para una CNN, se recomienda aplicar un tamño fijo de im
 <img src="doc/deep_framed.png" alt="BestPath - IIIT" width="500">
 
 Para saber que tamaño escoger, hemos analizados los diferentes tamaños que encontramos en el dataset. Visualizando la distribución de tamaños vemos en los dos conjuntos de datos una zona mucho mas concentrada.
-#### Distribución tamaño IIIT
+### Distribución tamaño IIIT
 
 <img src="doc/distribución_tamaño_iiit.png" alt="BestPath - IIIT" width="500">
-#### Distribución tamaño MJSynth
+### Distribución tamaño MJSynth
 
 <img src="doc/distribución_tamaño_mjsynth.png" alt="BestPath - IIIT" width="500">
 
@@ -57,8 +57,8 @@ BeamSearch busca las N secuencias más probables (determinado por el tamaño del
 #### 3.3.3 Función de pérdida y optimizador
 
 La función de pérdida utilizada es CTC loss, que se calcula como el negativo del logaritmo de la suma de las probabilidades de alineación. Como optimizador, se utiliza Adam (Adaptive Moment Estimation) para una actualización más precisa de los pesos de la red.
-### 4. Detalles de implementación Concretos
-#### 4.1 Estructura de Github
+## 4. Detalles de implementación Concretos
+### 4.1 Estructura de Github
 ```
 ├── main.py
 ├── test.py
@@ -72,17 +72,17 @@ La función de pérdida utilizada es CTC loss, que se calcula como el negativo d
 ```
 En la estructura de GitHub, tenemos los siguientes archivos y carpetas:
 
-main.py: El archivo principal que contiene el punto de entrada de la aplicación.
-test.py: Archivo para realizar pruebas y evaluaciones del sistema.
-train.py: Archivo para entrenar el modelo.
-preprocess.py: Archivo que contiene funciones de preprocesamiento de datos.
-data_loader.py: Archivo que carga los datos y prepara las imágenes y etiquetas para su uso en el modelo.
-model.py: Archivo que define la arquitectura del modelo de reconocimiento de texto.
-data/: Carpeta que contiene los conjuntos de datos utilizados.
-    IIIT/: Carpeta que contiene los datos del conjunto de datos IIIT.
-    MJSynth/: Carpeta que contiene los datos del conjunto de datos MJSynth.
+    main.py: El archivo principal que contiene el punto de entrada de la aplicación.
+    test.py: Archivo para realizar pruebas y evaluaciones del sistema.
+    train.py: Archivo para entrenar el modelo.
+    preprocess.py: Archivo que contiene funciones de preprocesamiento de datos.
+    data_loader.py: Archivo que carga los datos y prepara las imágenes y etiquetas para su uso en el modelo.
+    model.py: Archivo que define la arquitectura del modelo de reconocimiento de texto.
+    data/: Carpeta que contiene los conjuntos de datos utilizados.
+            IIIT/: Carpeta que contiene los datos del conjunto de datos IIIT.
+            MJSynth/: Carpeta que contiene los datos del conjunto de datos MJSynth.
         
-#### 4.2 Argumentos de línea de comandos
+### 4.2 Argumentos de línea de comandos
 ```
     --decoder: selecciona entre los decodificadores CTC "bestpath", "beamsearch" y "wordbeamsearch". Por defecto es "bestpath". Para la opción "wordbeamsearch", consulta los detalles a continuación.
     -- data_augmentation: aplica técnicas de data augmentation
@@ -90,14 +90,14 @@ data/: Carpeta que contiene los conjuntos de datos utilizados.
     -- minusula: utilizar solo minúsculas
     -- mayuscula: utilizar solo mayúsuculas
 ```
-#### 4.3 Opción Inferencia
+### 4.3 Opción Inferencia
 La opción de "inferencia" permite utilizar una imagen de entrada y obtener la palabra correspondiente después de haber entrenado el modelo. Es una forma de evaluar el rendimiento del sistema en la tarea de reconocimiento de texto.
 
-### 5. Pruebas / Resultados
+## 5. Pruebas / Resultados
 Se han tenido en cuenta dos casos. El entrenamiento teniendo en cuenta cada uno de los carácteres posibles (mayúsculas y minúsuculas incluidas) y solo minúsculas, ya que son los valores que mas predominan en nuestro dataset.
 A continuación se presentan los valores de precisión y pérdida obtenidos en la prueba con ambos algoritmos de búsqueda. Teniendo en cuenta todos los chars posibles (mayúsculas y minúsculas).
 
-#### 5.1 Utilizando Mayúsuculas y Minúsculas
+### 5.1 Utilizando Mayúsuculas y Minúsculas
 
 #### BestPath - MJSynth
 <img src="doc/bestpath_allchars_loss.png" alt="BestPath - MJSynth - loss" width="500">
@@ -121,19 +121,21 @@ En este conjunto de datos, solo se encuentran letras mayúsculas. Este hecho nos
 <img src="doc/beamsearch_allchars_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 Es interesante observar que, a pesar de cambiar el algoritmo de decodificación, los resultados obtenidos siguen siendo similares, con una precisión de alrededor de 63.5% y una pérdida de alrededor de 5.8%. Esto sugiere que la restricción en el rendimiento del sistema no se encuentra en el algoritmo de decodificación en sí.
 
-#### 5.2 Uso exclusivo de minúsculas
+### 5.2 Uso exclusivo de minúsculas
 Después de realizar un análisis exhaustivo, descubrimos que el número de minúsculas en el dataset es significativamente mayor, con 9,193,336 minúsculas en comparación con 5,264,306 mayúsculas. 
 
 <img src="doc/minusculas_acc_loss.png" alt="BeamSearch - MJSynth - cm" width="1000">
 Se aprecia una precisión de aproximadamente 0.8 en los dos casos y una loss de 0.2 mas o menos.
 #### BestPath - MJSynth
+
 <img src="doc/bestpath_min_cm_39.png" alt="BeamSearch - MJSynth - cm" width="500">
 #### BeamSearch - MJSynth
+
 <img src="doc/beamsearch_min_cm.png" alt="BeamSearch - MJSynth - cm" width="500">
 Vemos también un resultado impoluto en nuestras matrices de confusión, prácticamente no se aprecia ningún símbolo fuera de la diagonal de aciertos.
 Estos resultados respaldan nuestra hipótesis inicial de que el modelo tiene un desempeño superior al trabajar con letras minúsculas.
 
-### 6. Créditos
+## 6. Créditos
 A continuación, se mencionan los créditos y las fuentes utilizadas en el desarrollo del proyecto:
 
  - IIIT-5K Word Dataset: El conjunto de datos fue recolectado y anotado por el Centro de Visión e Imágenes por Computadora (CVIT) del Instituto Internacional de Tecnología de la Información de Hyderabad (IIIT-H). Puedes acceder a este dataset en el siguiente [enlace](https://cvit.iiit.ac.in/research/projects/cvit-projects/the-iiit-5k-word-dataset).
