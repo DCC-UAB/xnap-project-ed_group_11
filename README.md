@@ -1,5 +1,3 @@
-<img src="doc/beamsearch_allchars_loss.png" alt="Descripción de la imagen" width="500">
-
 # Cropped Text Recognition
 El objetivo principal de este proyecto es desarrollar e implementar un sistema de reconocimiento de texto capaz de identificar y transcribir el texto presente en imágenes que contengan palabras. 
 
@@ -51,17 +49,17 @@ A continuación se presentan los valores de precisión y pérdida obtenidos en l
 
 #### 4.1 Utilizando Mayúsuculas y Minúsculas
 BestPath - MJSynth
-![BestPath - MJSynth - loss](doc/bestpath_allchars_loss.png)
-![BestPath - MJSynth - accuracy](doc/bestpath_allchars_accuracy.png)
-![BestPath - MJSynth - cm](doc/bestpath_allchars_cm.png)
+![BestPath - MJSynth - loss](doc/bestpath_allchars_loss.png | width=500)
+![BestPath - MJSynth - accuracy](doc/bestpath_allchars_accuracy.png | width=500)
+![BestPath - MJSynth - cm](doc/bestpath_allchars_cm.png | width=500)
 
 BestPath - IIIT
-![BestPath - IIT](doc/bestpath_allchars_iiit.png)
+![BestPath - IIIT](doc/bestpath_allchars_iiit.png | width=500)
 
 BeamSearch - MJSynth
-![BeamSearch - MJSynth - loss](doc/beamsearch_allchars_loss.png)
-![BeamSearch - MJSynth - accuracy](doc/beamsearch_allchars_accuracy.png)
-![BeamSearch - MJSynth - cm](doc/beamsearch_allchars_cm.png)
+![BeamSearch - MJSynth - loss](doc/beamsearch_allchars_loss.png | width=500)
+![BeamSearch - MJSynth - accuracy](doc/beamsearch_allchars_accuracy.png | width=500)
+![BeamSearch - MJSynth - cm](doc/beamsearch_allchars_cm.png | width=500)
 
 <img src="doc/beamsearch_allchars_loss.png" alt="Descripción de la imagen" width="1000">
 
