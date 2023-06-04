@@ -1,3 +1,5 @@
+<img src="doc/beamsearch_allchars_loss.png" alt="Descripción de la imagen" width="1000">
+
 # Cropped Text Recognition
 El objetivo principal de este proyecto es desarrollar e implementar un sistema de reconocimiento de texto capaz de identificar y transcribir el texto presente en imágenes que contengan palabras. 
 
