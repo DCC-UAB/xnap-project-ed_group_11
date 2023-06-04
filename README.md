@@ -48,10 +48,10 @@ La función de pérdida utilizada es CTC loss, que se calcula como el negativo d
 Se han tenido en cuenta dos casos. El entrenamiento teniendo en cuenta cada uno de los carácteres posibles (mayúsculas y minúsuculas incluidas) y solo minúsculas, ya que son los valores que mas predominan en nuestro dataset.
 A continuación se presentan los valores de precisión y pérdida obtenidos en la prueba con ambos algoritmos de búsqueda. Teniendo en cuenta todos los chars posibles (mayúsculas y minúsculas).
 
-BestPath (
-BeamSearch
-MJSynth
-IIIT
+#### 4.1 Utilizando Mayúsuculas y Minúsculas
+BestPath - MJSynth
+BeamSearch - MJSynth
+BeamSearch - IIIT
 
 Uso exclusivo de minúsculas
 BestPath
