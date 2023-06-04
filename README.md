@@ -18,17 +18,20 @@ Recalcar que hemos entrenado tan solo con 15G.
 
 Aunque no sea necesario para una CNN, se recomienda aplicar un tamño fijo de imagenes, así nos aseguramos que los filtros convolucionales sean aplicados consistentemente en todas las imágenes, permitiendo que las características extraídas sean comparables y consistentes en todo el conjunto de datos.Es por eso que todas las imagenes son introducidas dentro de un rectangulo de un tamaño determinado:
 
-<img src="doc/deep.png" alt="BestPath - IIIT" width="500">
+<img src="doc/deep.png" alt="BestPath - IIIT" width="250">
 <img src="doc/deep_framed.png" alt="BestPath - IIIT" width="500">
 
 Para saber que tamaño escoger, hemos analizados los diferentes tamaños que encontramos en el dataset. Visualizando la distribución de tamaños vemos en los dos conjuntos de datos una zona mucho mas concentrada.
+### 2. Distribución tamaño IIIT
 
 <img src="doc/distribución_tamaño_iiit.png" alt="BestPath - IIIT" width="500">
+### 2. Distribución tamaño MJSynth
+
 <img src="doc/distribución_tamaño_mjsynth.png" alt="BestPath - IIIT" width="500">
 
 Además, tenemos la opción de aplicar técnicas de aumento de datos a una imagen. Estas técnicas incluyen cambios en la apariencia fotométrica, como desenfoque gaussiano, dilatación y erosión. También se realizan transformaciones geométricas, como cambios en la posición y escala de la imagen. Además, se ajusta el brillo, se agrega ruido y se invierte la imagen. Estas modificaciones no busca aumentar la cantidad de imagenes, si no enriquecer el conjunto de datos.
 
-<img src="doc/deep.png" alt="BestPath - IIIT" width="500">
+<img src="doc/deep.png" alt="BestPath - IIIT" width="250">
 <img src="doc/deep_da.png" alt="BestPath - IIIT" width="500">
 
 ## 3. Estructurar NN
@@ -123,6 +126,8 @@ Después de realizar un análisis exhaustivo, descubrimos que el número de min�
 
 <img src="doc/minusculas_acc_loss.png" alt="BeamSearch - MJSynth - cm" width="1000">
 Se aprecia una precisión de aproximadamente 0.8 en los dos casos y una loss de 0.2 mas o menos.
+<img src="doc/bestpath_min_cm_39.png" alt="BeamSearch - MJSynth - cm" width="1000">
+<img src="doc/beamsearch_min_cm.png" alt="BeamSearch - MJSynth - cm" width="1000">
 Estos resultados respaldan nuestra hipótesis inicial de que el modelo tiene un desempeño superior al trabajar con letras minúsculas.
 
 ### 6. Créditos
